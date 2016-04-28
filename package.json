@@ -1,7 +1,7 @@
 {
-  "name": "hw6",
+  "name": "project",
   "version": "1.0.0",
-  "description": "Penn Course Review API",
+  "description": "CIS 197 Final Project",
   "main": "app.js",
   "scripts": {
     "start": "node ./bin/run-server",

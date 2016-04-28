@@ -52,7 +52,7 @@
   <tbody>
   <%for (var i = 0; i < user.friends.length; i++){%>
     <tr>
-      <td><a href="/user/<%= user.friends[i] %>"><%= user.friends[i] %></a></td>
+      <td><a href="/user?username=<%= user.friends[i] %>"><%= user.friends[i] %></a></td>
       <td><form class="form-inline" action="/user/removeFriend/<%= user.friends[i] %>" method="post">
         <input align="left" class="form-control" type="submit" value="Remove Friend!"></input>
       </td></form>

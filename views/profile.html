@@ -49,7 +49,7 @@
 <h3 class="text-center"> Friends </h3>
 <ul>
 <%for (var i = 0; i < user.friends.length; i++){%>
-  <li><a href="/user/<%= user.friends[i] %>"><%= user.friends[i] %></a></li>
+  <li><a href="/user?username=<%= user.friends[i] %>"><%= user.friends[i] %></a></li>
 <%}%>
 </ul>
 

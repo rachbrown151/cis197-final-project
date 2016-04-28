@@ -1,27 +1,16 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/cis197hw6', function (err) {
+mongoose.connect('mongodb://localhost/cis197project', function (err) {
   if (err && err.message.includes('ECONNREFUSED')) {
     console.log('Error connecting to mongodb database: %s.\nIs "mongod" running?', err.message);
     process.exit(0);
   } else if (err) {
     throw err;
   } else {
-    console.log('DB successfully connected. Adding seed data...');
+    console.log('DB successfully connected.');
   }
 });
 
 var db = mongoose.connection;
-
-var keySchema = new mongoose.Schema({
-  key: String
-});
-
-var reviewSchema = new mongoose.Schema({
-  className: String,
-  semester: String,
-  rating: Number,
-  text: String
-});
 
 var userSchema = new mongoose.Schema({
   username: String,
@@ -31,14 +20,9 @@ var userSchema = new mongoose.Schema({
   newsfeed: Array
 });
 
-var Key = mongoose.model('Key', keySchema);
-var Reviews = mongoose.model('Reviews', reviewSchema);
 var User = mongoose.model('User', userSchema);
 
 module.exports = {
-  Key: Key,
-  Reviews: Reviews,
   User: User,
   mongoose: mongoose,
-  db: db.collection('Reviews')
 };
