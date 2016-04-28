@@ -20,13 +20,13 @@ module.exports = {
     });
   },
 
-  addFriend: function (user, friends, callback) {
+  updateFriend: function (user, friends, callback) {
     mongo.User.update(user, {friends: friends}, {}, function (error) {
       callback(error);
    });
   },
 
-  addSong: function (user, songs, callback) {
+  updateSong: function (user, songs, callback) {
     mongo.User.update(user, {songs: songs}, {}, function (error) {
       callback(error);
    });

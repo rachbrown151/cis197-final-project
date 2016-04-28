@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 
+//Sends get request to Spotify to search for songs with input name
 router.get('', function(req, res) {
   var trackIds = [];
   request.get({url:'https://api.spotify.com/v1/search?q='+req.query.name+'&type=track'}, function(e, r, user) {
