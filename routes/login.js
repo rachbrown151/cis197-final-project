@@ -4,7 +4,7 @@ var userDb = require('../db/user');
 
 //Checks whether user entered valid username and password
 var credentalsAreValid = function (username, password, callback) {
-  userDb.getUserByUserName(username, function(err, user) {
+  userDb.getUserByUserName(username, function (err, user) {
     if (user.length === 0) {
       callback(false);
     } else {
@@ -29,7 +29,7 @@ router.get('', function (req, res, next) {
 
 //If credentials are valid, logs in user, otherwise redirected to login page
 router.post('/login', function (req, res, next) {
-  credentalsAreValid(req.body.username, req.body.password, function(valid) {
+  credentalsAreValid(req.body.username, req.body.password, function (valid) {
     if (valid) {
       req.session.loggedIn = true;
       req.session.username = req.body.username;

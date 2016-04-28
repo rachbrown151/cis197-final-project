@@ -3,13 +3,12 @@ var router = express.Router();
 var request = require('request');
 
 //Sends get request to Spotify to search for songs with input name
-router.get('', function(req, res) {
+router.get('', function (req, res) {
   var trackIds = [];
-  request.get({url:'https://api.spotify.com/v1/search?q='+req.query.name+'&type=track'}, function(e, r, user) {
+  request.get({url:'https://api.spotify.com/v1/search?q=' + req.query.name + '&type=track'}, function (e, r, user) {
     if (user === undefined || JSON.parse(user).tracks === undefined) {
       res.render('songs', {songs: [], user: req.session.username});
-    }
-    else {
+    } else {
       var tracks = JSON.parse(user).tracks.items;
       var numTracks = Math.min(tracks.length, 5);
       for (var i = 0; i < numTracks; i++) {

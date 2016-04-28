@@ -5,20 +5,19 @@ var userDb = require('../db/user');
 /* Full path is /user?username=:username
  * Renders profile page for that specific user 
  */
-router.get('', function(req,res) {
-  userDb.getUserByUserName(req.query.username, function(err, user) {
+router.get('', function (req,res) {
+  userDb.getUserByUserName(req.query.username, function (err, user) {
     if (user.length > 0) {
       res.render('profile', {user: user[0], username: req.session.username});
-    }
-    else res.send('No user found with that username.')
+    } else res.send('No user found with that username.');
   });
 });
 
 /* Full path is /user/edit
  * Renders edit profile page for logged in user
  */
-router.get('/edit', function(req,res) {
-  userDb.getUserByUserName(req.session.username, function(err, user) {
+router.get('/edit', function (req,res) {
+  userDb.getUserByUserName(req.session.username, function (err, user) {
     res.render('edit', {user: user[0]});
   });
 });
@@ -26,21 +25,21 @@ router.get('/edit', function(req,res) {
 /* Adds :username as a friend for logged in user if :username is
  * not already a friend of the logged in user (only one way friendship though)
  */
-router.post('/addFriend/:username', function(req,res) {
+router.post('/addFriend/:username', function (req,res) {
   var shouldFriend = true;
   if (req.params.username === req.session.username) {
     shouldFriend = false;
   }
-  userDb.getUserByUserName(req.session.username, function(err, user) {
+  userDb.getUserByUserName(req.session.username, function (err, user) {
     for (var i = 0; i < user[0].friends.length; i++) {
       if (user[0].friends[i] === req.params.username) {
         shouldFriend = false;
       }
     }
     if (shouldFriend) {
-      friends = user[0].friends;
+      var friends = user[0].friends;
       friends.push(req.params.username);
-      userDb.updateFriend({username: req.session.username}, friends, function(err) {
+      userDb.updateFriend({username: req.session.username}, friends, function (err) {
         res.redirect('/user/?username=' + req.session.username);
       });
     } else {
@@ -50,18 +49,18 @@ router.post('/addFriend/:username', function(req,res) {
 });
 
 // Removes :username as a friend for legged in user
-router.post('/removeFriend/:username', function(req,res) {
+router.post('/removeFriend/:username', function (req,res) {
   var index = -1;
-  userDb.getUserByUserName(req.session.username, function(err, user) {
+  userDb.getUserByUserName(req.session.username, function (err, user) {
     for (var i = 0; i < user[0].friends.length; i++) {
       if (user[0].friends[i] === req.params.username) {
         index = i;
       }
     }
     if (index !== -1) {
-      friends = user[0].friends;
+      var friends = user[0].friends;
       friends.splice(index, 1);
-      userDb.updateFriend({username: req.session.username}, friends, function(err) {
+      userDb.updateFriend({username: req.session.username}, friends, function (err) {
         res.redirect('/user/edit');
       });
     } else {
@@ -71,18 +70,18 @@ router.post('/removeFriend/:username', function(req,res) {
 });
 
 // Adds :id (spotify song id) to user's liked songs
-router.post('/likeSong/:id', function(req,res) {
+router.post('/likeSong/:id', function (req,res) {
   var shouldLike = true;
-  userDb.getUserByUserName(req.session.username, function(err, user) {
+  userDb.getUserByUserName(req.session.username, function (err, user) {
     for (var i = 0; i < user[0].songs.length; i++) {
       if (user[0].songs[i] === req.params.id) {
         shouldLike = false;
       }
     }
     if (shouldLike) {
-      songs = user[0].songs;
+      var songs = user[0].songs;
       songs.push(req.params.id);
-      userDb.updateSong({username: req.session.username}, songs, function(err) {
+      userDb.updateSong({username: req.session.username}, songs, function (err) {
         res.redirect('/user/?username=' + req.session.username);
       });
     } else {
@@ -92,18 +91,18 @@ router.post('/likeSong/:id', function(req,res) {
 });
 
 // Removes :id (spotify song id) from user's liked songs
-router.post('/dislikeSong/:id', function(req,res) {
-  index = -1;
-  userDb.getUserByUserName(req.session.username, function(err, user) {
+router.post('/dislikeSong/:id', function (req,res) {
+  var index = -1;
+  userDb.getUserByUserName(req.session.username, function (err, user) {
     for (var i = 0; i < user[0].songs.length; i++) {
       if (user[0].songs[i] === req.params.id) {
         index = i;
       }
     }
     if (index !== -1) {
-      songs = user[0].songs;
+      var songs = user[0].songs;
       songs.splice(index, 1);
-      userDb.updateSong({username: req.session.username}, songs, function(err) {
+      userDb.updateSong({username: req.session.username}, songs, function (err) {
         res.redirect('/user/edit');
       });
     } else {

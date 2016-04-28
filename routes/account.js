@@ -16,7 +16,7 @@ router.post('', function (req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
   if (username !== '' && password !== '') {
-    userDb.getUserByUserName(username, function(err, user) {
+    userDb.getUserByUserName(username, function (err, user) {
       if (user.length > 0) {
         res.send('Username already exists. Please try another username.');
       } else {
