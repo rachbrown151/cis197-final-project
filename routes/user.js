@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 var userDb = require('../db/user');
 
-router.get('/:username', function(req,res) {
-  userDb.getUserByUserName(req.params.username, function(err, user) {
+router.get('', function(req,res) {
+  userDb.getUserByUserName(req.query.username, function(err, user) {
     if (user.length > 0) {
       res.render('profile', {user: user[0], username: req.session.username});
     }
-    else res.send('No user found with that username')
+    else res.send('No user found with that username.')
   });
 });
 
@@ -26,10 +26,10 @@ router.post('/addFriend/:username', function(req,res) {
       friends = user[0].friends;
       friends.push(req.params.username);
       userDb.addFriend({username: req.session.username}, friends, function(err) {
-        res.redirect('/user/' + req.session.username);
+        res.redirect('/user/?username=' + req.session.username);
       });
     } else {
-      res.redirect('/user/' + req.session.username);
+      res.redirect('/user/?username=' + req.session.username);
     }
   });
 });
@@ -46,10 +46,10 @@ router.post('/likeSong/:id', function(req,res) {
       songs = user[0].songs;
       songs.push(req.params.id);
       userDb.addSong({username: req.session.username}, songs, function(err) {
-        res.redirect('/user/' + req.session.username);
+        res.redirect('/user/?username=' + req.session.username);
       });
     } else {
-      res.redirect('/user/' + req.session.username);
+      res.redirect('/user/?username=' + req.session.username);
     }
   });
 });

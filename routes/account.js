@@ -20,7 +20,7 @@ router.post('', function (req, res, next) {
           } else {
             req.session.loggedIn = true;
             req.session.username = req.body.username;
-            res.redirect('/user/' + req.session.username);
+            res.redirect('/user/?username=' + req.session.username);
           }
         });
       }

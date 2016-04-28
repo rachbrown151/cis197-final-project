@@ -5,9 +5,13 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <p class="navbar-brand"><%= user.username %>'s Profile </p>
-      <a class="navbar-text" href="/user/<%= username %>">Profile</a>
+      <a class="navbar-text" href="/user/?username=<%= username %>">Profile</a>
       <form class="navbar-form navbar-left" action="/song" method="get" style='display:inline;'>
         <input type="text" class="form-control" name="name" placeholder="Input Song Name">
+        <input type="submit" class="form-control" value="Search!"></input>
+      </form>
+      <form class="navbar-form navbar-left" action="/user" method="get" style='display:inline;'>
+        <input type="text" class="form-control" name="username" placeholder="Input User Name">
         <input type="submit" class="form-control" value="Search!"></input>
       </form>
     </ul>
