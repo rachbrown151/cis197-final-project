@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 var userDb = require('../db/user');
 
-router.get('/createAccount', function (req, res, next) {
+router.get('', function (req, res, next) {
   res.render('createAccount');
 });
 
-router.post('/createAccount', function (req, res, next) {
+router.post('', function (req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
   if (username !== '' && password !== '') {
