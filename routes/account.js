@@ -4,7 +4,11 @@ var userDb = require('../db/user');
 
 //Renders create account page
 router.get('', function (req, res, next) {
-  res.render('createAccount');
+  if (req.session.loggedIn) {
+    res.redirect('/user/?username=' + req.session.username);
+  } else {
+    res.render('createAccount');
+  }
 });
 
 //Creates a new account and redirects user to their profile

@@ -15,7 +15,16 @@ var credentalsAreValid = function (username, password, callback) {
 
 //Render login page
 router.get('/login', function (req, res, next) {
-  res.render('login');
+  if (req.session.loggedIn) {
+    res.redirect('/user/?username=' + req.session.username);
+  } else {
+    res.render('login');
+  }
+});
+
+//Redirect to login page
+router.get('', function (req, res, next) {
+  res.redirect('/login');
 });
 
 //If credentials are valid, logs in user, otherwise redirected to login page

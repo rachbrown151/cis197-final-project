@@ -1,9 +1,28 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-brand">MusicBook</p>
+      <a class="navbar-text" href="/login"> Login </a>
+  </div></div>
+</nav>
+
+<div class="container-fluid">
 <h1>Create Account</h1>
 <form method="post">
-  <p>Username<br>
-  <input type="text" name="username"></p>
-  <p>Password<br>
-  <input type="password" name="password"></p>
-  <p><input type="submit"></p>
+  <div class="form-group has-alert has-feedback">
+    <span class="input-group-addon"><p class="glyphicon glyphicon-user" id="1" aria-hidden="true"></p></span>
+    <input type="text" class="form-control" name="username" placeholder="User Name" aria-described-by="1"></input>
+  </div>
+  <div class="form-group has-alert has-feedback">
+    <span class="input-group-addon"><p class="glyphicon glyphicon-asterisk" id="2" aria-hidden="true"></p></span>
+    <input type="password" class="form-control" name="password" placeholder="Password" aria-described-by="2"></input>
+  </div>
+  <p><input type="submit" class="form-control"></p>
 </form>
+</div>
+
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/bootstrap.min.js"></script>
