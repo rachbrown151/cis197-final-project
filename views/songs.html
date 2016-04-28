@@ -1,0 +1,41 @@
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-brand">Song Search Page</p>
+      <a class="navbar-text" href="/user/<%= user %>">Profile</a>
+      <form class="navbar-form navbar-left" action="/song" method="get" style='display:inline;'>
+        <input type="text" class="form-control" name="name" placeholder="Input Song Name">
+        <input type="submit" class="form-control" value="Search!"></input>
+      </form>
+    </ul>
+  </div></div>
+</nav>
+<table class="table table-striped" width="200">
+  <thead>
+    <tr>
+      <th> Play song </th>
+      <th> Like song </th>
+    </tr>
+  </thead>
+  <tbody>
+  <%for (var i = 0; i < songs.length; i++){%>
+    <tr>
+      <td><iframe src="https://embed.spotify.com/?uri=spotify:track:<%= songs[i] %>" frameborder="0" allowtransparency="true"></iframe></td>
+      <td>
+          <form action="/user/likeSong/<%= songs[i] %>" method="post">
+            <div class="form-group has-success has-feedback">
+              <input type="submit" class="form-control" value="Like!"></input>
+              <span class="glyphicon glyphicon-thumbs-up form-control-feedback" aria-hidden="true"></span>
+            </div>
+          </form>
+      </td>
+    </tr>
+  <%}%>
+  </tbody>
+</table>
+
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/bootstrap.min.js"></script>

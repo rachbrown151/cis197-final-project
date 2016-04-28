@@ -1,0 +1,55 @@
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-brand"><%= user.username %>'s Profile </p>
+      <a class="navbar-text" href="/user/<%= username %>">Profile</a>
+      <form class="navbar-form navbar-left" action="/song" method="get" style='display:inline;'>
+        <input type="text" class="form-control" name="name" placeholder="Input Song Name">
+        <input type="submit" class="form-control" value="Search!"></input>
+      </form>
+    </ul>
+  </div></div>
+</nav>
+
+<h3 class="text-center"> Liked Songs </h3>
+<table class="table table-striped" width="200">
+  <thead>
+    <tr>
+      <th> Play song </th>
+      <th> Like song </th>
+    </tr>
+  </thead>
+  <tbody>
+  <%for (var i = 0; i < user.songs.length; i++){%>
+    <tr>
+      <td><iframe src="https://embed.spotify.com/?uri=spotify:track:<%= user.songs[i] %>" frameborder="0" allowtransparency="true"></iframe></td>
+      <td>
+          <form action="/user/likeSong/<%= user.songs[i] %>" method="post">
+            <div class="form-group has-success has-feedback">
+              <input type="submit" class="form-control" value="Like!"></input>
+              <span class="glyphicon glyphicon-thumbs-up form-control-feedback" aria-hidden="true"></span>
+            </div>
+          </form>
+      </td>
+    </tr>
+  <%}%>
+  </tbody>
+</table>
+
+
+<h3 class="text-center"> Friends </h3>
+<ul>
+<%for (var i = 0; i < user.friends.length; i++){%>
+  <li><a href="/user/<%= user.friends[i] %>"><%= user.friends[i] %></a></li>
+<%}%>
+</ul>
+
+<form class="navbar-form" action="/user/addFriend/<%= user.username %>" method="post">
+  <input class="form-control" type="submit" value="Add Friend!"></input>
+</form>
+
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/bootstrap.min.js"></script>
